@@ -13,3 +13,7 @@ yarn start
 yarn storybook
 yarn build-storybook
 ```
+
+
+### Notes
+- Integrate theme from here? https://github.com/tailwindtoolbox/Landing-Page
