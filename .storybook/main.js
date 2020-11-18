@@ -1,6 +1,6 @@
 module.exports = {
   stories: ["../src/**/*.stories.@(ts|tsx|js|jsx)", "../docs/**/*.stories.mdx"],
-  addons: ["@storybook/addon-actions", "@storybook/addon-links"],
+  addons: ["@storybook/addon-actions", "@storybook/addon-docs/preset"],
   webpackFinal: (config) => {
     return {
       ...config,
