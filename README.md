@@ -14,6 +14,6 @@ yarn storybook
 yarn build-storybook
 ```
 
-
 ### Notes
 - Integrate theme from here? https://github.com/tailwindtoolbox/Landing-Page
+- Add performance metrics? https://nextjs.org/docs/advanced-features/measuring-performance
