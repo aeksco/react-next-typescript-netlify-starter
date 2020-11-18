@@ -6,5 +6,5 @@ export function Hello() {
             <p>Hello!</p>
             <button className="btn btn-blue">Button Example</button>
         </div>
-    )
+    );
 }

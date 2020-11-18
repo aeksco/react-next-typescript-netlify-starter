@@ -4,9 +4,6 @@ import { Hello } from "../component";
 
 // // // //
 
-storiesOf("Examples/Hello", module)
-    .add("renders", () => {
-        return (
-            <Hello />
-        );
-    })
+storiesOf("Examples/Hello", module).add("renders", () => {
+    return <Hello />;
+});
