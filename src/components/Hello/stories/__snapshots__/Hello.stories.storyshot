@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Examples/Hello renders 1`] = `
+<div>
+  <p>
+    Hello!
+  </p>
+  <button
+    className="btn btn-blue"
+  >
+    Button Example
+  </button>
+</div>
+`;

@@ -1,5 +1,7 @@
 import theme from "./theme";
-import "../src/styles/index.css";
+
+// TODO - find a way to ignore this, or make it work with @storybook/addon-storyshots
+// import "../src/styles/index.css";
 
 export const parameters = {
   layout: "centered",
