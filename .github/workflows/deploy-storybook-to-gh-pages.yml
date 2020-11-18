@@ -1,0 +1,35 @@
+name: GH-Pages-Deploy
+
+# Run this workflow every time a new commit pushed to the repository
+on: push
+
+jobs:
+  gh-pages-deploy:
+    name: Deploy Storybook to gh-pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: yarn install
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # runs `yarn install` command
+
+      - name: yarn build-storybook
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: build-storybook # runs `yarn build-storybook` command
+
+      - name: Update gh-pages branch
+        run: |
+          git fetch
+          git checkout gh-pages
+          rm -rf ./docs
+          mv ./storybook-static ./docs
+          git config --global user.email "aeksco@gmail.com"
+          git config --global user.name "Alexander Schwartzberg"
+          git add ./docs
+          git commit -m 'Updated gh-pages with latest storybook build'
+          git push origin gh-pages
