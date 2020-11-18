@@ -4,8 +4,9 @@
 
 /* Example Tailwind CSS abstractions */
 .btn {
-  @apply font-bold;
+  @apply font-semibold;
   @apply py-2;
+  @apply px-6;
   @apply rounded;
 }
 .btn-blue {
