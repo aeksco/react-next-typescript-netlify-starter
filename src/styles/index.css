@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tailwind abstractions */
+/* Example Tailwind CSS abstractions */
 .btn {
-  @apply font-bold py-2 px-4 rounded;
+  @apply font-bold;
+  @apply py-2;
+  @apply rounded;
 }
 .btn-blue {
-  @apply bg-blue-500 text-white;
+  @apply text-white;
+  @apply bg-blue-500;
 }
 .btn-blue:hover {
   @apply bg-blue-700;
