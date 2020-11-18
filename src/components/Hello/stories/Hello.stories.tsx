@@ -1,7 +1,12 @@
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import { Hello } from "../component";
 
-import React from 'react'
-import { Hello } from '../component'
+// // // //
 
-export default { title: 'Hello Component' }
-
-export const simpleComponent = () => <Hello />
+storiesOf("Examples/Hello", module)
+    .add("renders", () => {
+        return (
+            <Hello />
+        );
+    })
