@@ -21,7 +21,7 @@ function ItemForm(props: {
     const [name, setName] = React.useState<string>(props.name);
     return (
         <form
-            className="flex flex-row w-full mt-2 border-t border-b border-gray-400 py-4"
+            className="flex flex-row w-full"
             onSubmit={e => {
                 e.preventDefault();
 
@@ -45,6 +45,17 @@ function ItemForm(props: {
                 &#10004;
             </button>
         </form>
+    );
+}
+
+function ItemFormLayout(props: {
+    name: string;
+    onSubmit: (submittedName: string) => void;
+}) {
+    return (
+        <div className="flex flex-row w-full mt-2 border-t border-b border-gray-400 py-4">
+            <ItemForm {...props} />
+        </div>
     );
 }
 
@@ -109,6 +120,69 @@ function ListConrols(props: {
 
 // // // //
 
+function ListItem(props: {
+    item: Item;
+    onChangeDone: () => void;
+    onChangeName: (updatedName: string) => void;
+    onRemove: () => void;
+}) {
+    const { item, onChangeName, onChangeDone, onRemove } = props;
+    const [isEditing, setIsEditing] = React.useState<boolean>(false);
+    return (
+        <li
+            className="flex py-4 flex-row w-full justify-between items-center border-2 border-t-0 border-l-0 border-r-0 border-gray-400"
+            key={item.id}
+        >
+            <div className="flex items-center">
+                <button
+                    onClick={() => {
+                        onChangeDone();
+                    }}
+                >
+                    {item.done && (
+                        <p className="text-green-400 text-4xl">&#9745;</p>
+                    )}
+                    {!item.done && (
+                        <p className="text-gray-400 text-4xl">&#9745;</p>
+                    )}
+                </button>
+                {!isEditing && (
+                    <p
+                        className="ml-2"
+                        onClick={() => {
+                            setIsEditing(true);
+                        }}
+                    >
+                        {item.name}
+                    </p>
+                )}
+
+                {isEditing && (
+                    <div className="ml-4">
+                        <ItemForm
+                            name={item.name}
+                            onSubmit={(updatedName: string) => {
+                                onChangeName(updatedName);
+                                setIsEditing(false);
+                            }}
+                        />
+                    </div>
+                )}
+            </div>
+            <div className="flex">
+                <button
+                    onClick={() => {
+                        onRemove();
+                    }}
+                    className="btn bg-red-600 text-white hover:bg-red-700	"
+                >
+                    Remove
+                </button>
+            </div>
+        </li>
+    );
+}
+
 /**
  * TodoList
  * Renders a component for managing an Array<Item>
@@ -131,7 +205,7 @@ function TodoList(props: { items: Item[] }) {
     if (items.length === 0) {
         return (
             <div className="flex flex-col w-full pt-4 items-center">
-                <ItemForm
+                <ItemFormLayout
                     name=""
                     onSubmit={updatedName => {
                         addItem(updatedName);
@@ -149,7 +223,7 @@ function TodoList(props: { items: Item[] }) {
 
     return (
         <div className="flex flex-col w-full">
-            <ItemForm
+            <ItemFormLayout
                 name=""
                 onSubmit={updatedName => {
                     addItem(updatedName);
@@ -158,51 +232,39 @@ function TodoList(props: { items: Item[] }) {
             <ListConrols items={items} onChange={setItems} />
             {items.map(item => {
                 return (
-                    <li
-                        className="flex py-4 flex-row w-full justify-between items-center border-2 border-t-0 border-l-0 border-r-0 border-gray-400"
+                    <ListItem
                         key={item.id}
-                        onClick={() => {
-                            console.log(item.id);
+                        item={item}
+                        onChangeDone={() => {
+                            setItems(
+                                items.map(i => {
+                                    if (i.id === item.id) {
+                                        return {
+                                            ...item,
+                                            done: !item.done,
+                                        };
+                                    }
+                                    return i;
+                                }),
+                            );
                         }}
-                    >
-                        <div className="flex items-center">
-                            <button
-                                onClick={() => {
-                                    setItems(
-                                        items.map(i => {
-                                            if (i.id === item.id) {
-                                                return {
-                                                    ...item,
-                                                    done: !item.done,
-                                                };
-                                            }
-                                            return i;
-                                        }),
-                                    );
-                                }}
-                            >
-                                {item.done && (
-                                    <p className="text-green-400 text-4xl">
-                                        &#9745;
-                                    </p>
-                                )}
-                                {!item.done && (
-                                    <p className="text-gray-400 text-4xl">
-                                        &#9745;
-                                    </p>
-                                )}
-                            </button>
-                            <p className="ml-2">{item.name}</p>
-                        </div>
-                        <button
-                            onClick={() => {
-                                setItems(items.filter(i => i.id !== item.id));
-                            }}
-                            className="btn bg-red-600 text-white hover:bg-red-700	"
-                        >
-                            Remove
-                        </button>
-                    </li>
+                        onChangeName={(updatedName: string) => {
+                            setItems(
+                                items.map(i => {
+                                    if (i.id === item.id) {
+                                        return {
+                                            ...item,
+                                            name: updatedName,
+                                        };
+                                    }
+                                    return i;
+                                }),
+                            );
+                        }}
+                        onRemove={() => {
+                            setItems(items.filter(i => i.id !== item.id));
+                        }}
+                    />
                 );
             })}
         </div>
