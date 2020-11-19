@@ -17,3 +17,4 @@ yarn build-storybook
 ### Notes
 - Integrate theme from here? https://github.com/tailwindtoolbox/Landing-Page
 - Add performance metrics? https://nextjs.org/docs/advanced-features/measuring-performance
+- Add Tailwind CSS theme switcher - https://dev.to/ohitslaurence/creating-dynamic-themes-with-react-tailwindcss-59cl
