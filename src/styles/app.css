@@ -4,15 +4,15 @@
 
 /* Example Tailwind CSS abstractions */
 .btn {
-  @apply font-semibold;
-  @apply py-2;
-  @apply px-6;
-  @apply rounded;
+    @apply font-semibold;
+    @apply py-2;
+    @apply px-6;
+    @apply rounded;
 }
 .btn-blue {
-  @apply text-white;
-  @apply bg-blue-500;
+    @apply text-white;
+    @apply bg-blue-500;
 }
 .btn-blue:hover {
-  @apply bg-blue-700;
+    @apply bg-blue-700;
 }
