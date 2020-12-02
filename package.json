@@ -14,7 +14,10 @@
     "author": "Alexander Schwartzberg",
     "license": "MIT",
     "dependencies": {
+        "@aws-amplify/ui-react": "^0.2.30",
+        "aws-amplify": "^3.3.10",
         "jest": "^26.6.3",
+        "mongodb": "^3.6.3",
         "next": "latest",
         "react": "^16.8.0",
         "react-dom": "^16.8.0",
