@@ -10,7 +10,7 @@ import * as React from "react";
 
 type Item = {
     id: number;
-    name: string;
+    label: string;
     done: boolean;
 };
 
@@ -153,14 +153,14 @@ function ListItem(props: {
                             setIsEditing(true);
                         }}
                     >
-                        {item.name}
+                        {item.label}
                     </p>
                 )}
 
                 {isEditing && (
                     <div className="ml-4">
                         <ItemForm
-                            name={item.name}
+                            name={item.label}
                             onSubmit={(updatedName: string) => {
                                 onChangeName(updatedName);
                                 setIsEditing(false);
@@ -196,7 +196,7 @@ function TodoList(props: { items: Item[] }) {
             ...items,
             {
                 id: Math.random(),
-                name: newItemName,
+                label: newItemName,
                 done: false,
             },
         ]);
@@ -254,7 +254,7 @@ function TodoList(props: { items: Item[] }) {
                                     if (i.id === item.id) {
                                         return {
                                             ...item,
-                                            name: updatedName,
+                                            label: updatedName,
                                         };
                                     }
                                     return i;
@@ -279,9 +279,9 @@ export default function() {
             <h1 className="text-xl">Todo List</h1>
             <TodoList
                 items={[
-                    { id: 1, name: "Brush teeth", done: false },
-                    { id: 2, name: "Eat", done: true },
-                    { id: 3, name: "Sleep", done: false },
+                    { id: 1, label: "Brush teeth", done: false },
+                    { id: 2, label: "Eat", done: true },
+                    { id: 3, label: "Sleep", done: false },
                 ]}
             />
         </div>
