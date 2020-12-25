@@ -1,4 +1,4 @@
-import { withSSRContext } from "aws-amplify";
+import { getServerSidePropsProtected } from "../middleware/getServerSidePropsProtected";
 
 export default function Protected({ authenticated, username }) {
     if (!authenticated) {
@@ -11,21 +11,6 @@ export default function Protected({ authenticated, username }) {
     );
 }
 
-export async function getServerSideProps({ req }) {
-    const { Auth } = withSSRContext({ req });
-    try {
-        const user = await Auth.currentAuthenticatedUser();
-        return {
-            props: {
-                authenticated: true,
-                username: user.attributes.email,
-            },
-        };
-    } catch (err) {
-        return {
-            props: {
-                authenticated: false,
-            },
-        };
-    }
+export async function getServerSideProps({ req, res }) {
+    return getServerSidePropsProtected({ req, res });
 }

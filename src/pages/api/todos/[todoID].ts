@@ -73,3 +73,14 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         }
     });
 };
+
+// // // //
+
+// export async function getServerSideProps({ req }) {
+//     return {
+//         props: {
+//             username: "foobar",
+//             authenticated: true,
+//         },
+//     };
+// }

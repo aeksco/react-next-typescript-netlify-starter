@@ -1,14 +1,16 @@
+import { getServerSidePropsProtected } from "../../middleware/getServerSidePropsProtected";
 import * as React from "react";
 import { useQuery } from "react-query";
+import { withRouter, Router } from "next/router";
 import Link from "next/link";
 
 // // // //
 
-type Item = {
+interface Item {
     _id: string;
     label: string;
     done: boolean;
-};
+}
 
 function ListItem(props: { item: Item }) {
     const { item } = props;
@@ -65,13 +67,13 @@ function ListItem(props: { item: Item }) {
 
 // // // //
 
-export default function() {
+export default function(props: { router: Router }) {
     const { isLoading, error, data } = useQuery("todoListing", () =>
         fetch("/api/todos").then(res => res.json()),
     );
 
-    if (isLoading) return "Loading...";
-    if (error) return "An error has occurred: " + error.message;
+    if (isLoading) return <>Loading...</>;
+    if (error) return <>An error has occurred</>;
 
     return (
         <div className="px-10 py-10">
@@ -88,4 +90,17 @@ export default function() {
             </div>
         </div>
     );
+}
+
+export async function getServerSideProps({ req, res }) {
+    return getServerSidePropsProtected({ req, res });
+    // const baseUrl = "http://localhost:3000";
+    // // const response = await fetch(baseUrl + `${baseUrl}/api/todos`);
+    // const resp = await fetch(`${baseUrl}/api/todos`).then(res => res.json());
+    // return {
+    //     props: {
+    //         todos: resp.items,
+    //         ...authProps.props,
+    //     },
+    // };
 }

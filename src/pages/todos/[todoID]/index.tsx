@@ -2,12 +2,18 @@ import { withRouter, Router } from "next/router";
 import React, { useState, useEffect } from "react";
 
 // // // //
-function TodoShowPage(props: { router: Router }) {
+
+export default withRouter((props: { router: Router }) => {
     const { router } = props;
-    const todoID = String(router.query.todoID);
+
+    if (router.query.todoID === undefined) {
+        return null;
+    }
 
     const [hasError, setErrors] = useState(false);
     const [item, setItem] = useState({});
+
+    const todoID = router.query.todoID;
 
     async function fetchData() {
         const res = await fetch(`/api/todos/${todoID}/`);
@@ -27,6 +33,4 @@ function TodoShowPage(props: { router: Router }) {
             <hr />
         </div>
     );
-}
-
-export default withRouter(TodoShowPage);
+});

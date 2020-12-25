@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
             <nav style={{ display: "flex" }}>
                 <Link href="/">Home</Link>
                 <Link href="/profile">Profile</Link>
+                <Link href="/todos">Todos</Link>
             </nav>
             <ReactQueryCacheProvider queryCache={queryCache}>
                 <Component {...pageProps} />
